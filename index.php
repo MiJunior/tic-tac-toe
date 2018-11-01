@@ -22,7 +22,8 @@
         <div class="block cell8"></div>
         <div class="block cell9"></div>
     </div>
+    <button class="save">Save</button>
+    <button class="new">New game</button>
     <script src="script.js"></script>
-    <script type="text/javascript"> var curent_url = document.URL; document.write("<a href='" + curent_url + "'>Начать сначала</a>"); </script><br><br>
 </body>
 </html>
