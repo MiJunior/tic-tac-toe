@@ -68,9 +68,6 @@ $(document).ready(function () {
             if( $('.'+first).text() == mark && $('.'+second).text() == '' && $('.'+third).text() == mark && exit_flag == false ){
 
                 localStorage.setItem(second, mark);
-                console.log(first);
-                console.log(second);
-                console.log(third);
                 $('.'+second).text(mark);
                 $('.'+first+',.'+second+',.'+third).css("background-color", "#EF7C7C");
                 localStorage.setItem('result', 'You lose');
@@ -82,9 +79,6 @@ $(document).ready(function () {
             if( $('.'+first).text() == '' && $('.'+second).text() == mark && $('.'+third).text() == mark && exit_flag == false ){
 
                 localStorage.setItem(first, mark);
-                console.log(first);
-                console.log(second);
-                console.log(third);
                 $('.'+first).text(mark);
                 $('.'+first+',.'+second+',.'+third).css("background-color", "#EF7C7C");
                 localStorage.setItem('result', 'You lose');
@@ -133,8 +127,7 @@ $(document).ready(function () {
 
         if($('.tic-tac-toe .block').text() !==''){
             for(var i = 1; i<10 ; i++){
-                var e = document.getElementsByClassName('cell'+i)[0];
-                localStorage.setItem('cell'+i, e.innerHTML );
+                localStorage.setItem('cell'+i, $('.cell'+i).text() );
             }
         }
     });

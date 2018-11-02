@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="tic-tac-toe">
-        <p class="result">Your turn</p>
+        <p class="result"></p>
         <div class="block cell1"></div>
         <div class="block cell2"></div>
         <div class="block cell3"></div>
