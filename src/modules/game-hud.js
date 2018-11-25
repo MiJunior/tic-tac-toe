@@ -18,23 +18,23 @@ export class GameHud {
         this.turns = 0;
         this.gameEngine = new GameEngine(["X", "O"], lastWinner);
 
-        if (localStorage.getItem('old_field')) {
-            document.body.insertAdjacentHTML('afterend', localStorage.getItem('old_field'));
-        }
-        this.gameField = new GameField(this.gameEngine.field);
+        if (localStorage.getItem('oldFields')) {
+            document.body.insertAdjacentHTML('beforeEnd', JSON.parse(localStorage.getItem('oldFields')));
+        }else {
+            this.gameField = new GameField(this.gameEngine.field);
 
-        this.gameField.items.forEach(row => {
-            row.items.forEach(slot => {
-                slot.element.addEventListener("click", element =>
-                    this.occupyField(element)
-                );
+            this.gameField.items.forEach(row => {
+                row.items.forEach(slot => {
+                    slot.element.addEventListener("click", element =>
+                        this.occupyField(element)
+                    );
+                });
             });
-        });
 
-        document.body.appendChild(this.gameField.element);
-
-        new Notice(`Game Start! First to Play: ${this.gameEngine.turnOf}`, 3000);
-        this.turnInfo.update(this.turns, this.gameEngine.turnOf);
+            document.body.appendChild(this.gameField.element);
+        }
+            new Notice(`Game Start! First to Play: ${this.gameEngine.turnOf}`, 3000);
+            this.turnInfo.update(this.turns, this.gameEngine.turnOf);
     }
 
     get isGameEnd() {
@@ -54,7 +54,7 @@ export class GameHud {
         } else if (this.gameEngine.isTie) {
             new Notice(`Game End! It's a Tie! Game took ${this.turns} turns`, 1500);
         }
-
+        localStorage.clear();
         setTimeout(() => {
             this.createGameField(winner);
         }, 1500);
@@ -84,13 +84,7 @@ export class GameHud {
         this.gameField
             .getItem(turnAction.row)
             .getItem(turnAction.column).textContent = turnAction;
-        let oldFields = document.querySelector("game-field");
-        /**
-         * TODO create normal insert to localStorage
-         * now it`s return object HTMLElement
-         */
-        console.log(String(oldFields));
-        localStorage.setItem('old_field', String(oldFields));
-
+        let old = document.querySelector("game-field");
+        localStorage.setItem('oldFields', JSON.stringify(old.outerHTML));
     }
 }
